@@ -11,7 +11,6 @@ module.exports = (app) => {
   app.use(cors());
 
   app.use(express.static(path.join(__dirname, '/../client')));
-
   const server = http.createServer(app);
   const port = 3000;
   server.listen(port);
