@@ -2,6 +2,9 @@
 
 const express = require('express');
 const session = require('express-session');
+const http = require('http');
+const path = require('path');
+const cors = require('cors');
 
 const app = express();
 require('./file-server.js')(app);
@@ -17,7 +20,17 @@ const {
 
 const IN_PROD = NODE_ENV === 'production';
 
+const server = http.createServer(app);
+const port = 3000;
+server.listen(port);
+console.debug('Server listening on port ' + port);
+
+
 /* SETUP */
+
+// VARIABLES
+const users = {};
+// VARIABLES
 
 const verify = async (token, res) => {
 
@@ -30,8 +43,14 @@ const verify = async (token, res) => {
     const userid = payload['sub'];
     const domain = payload['hd'];
 
-    console.log(userid);
-    console.log(domain);
+    const u = {
+      name: payload['name'],
+      email: payload['email'],
+      picture: payload['picture']
+    }
+    users[userid] = u;
+
+    console.log(users);
 
     res.status(200).send();
     

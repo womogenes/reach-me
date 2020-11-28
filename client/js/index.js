@@ -16,16 +16,16 @@ function onSignIn(googleUser) {
     'idToken': idToken
   };
 
-  axios.post('http://localhost:3000/login', data, config).then(
-    res => {
-      console.log(res.headers);
-    }
-  );
+  axios.post('http://localhost:3000/login', data, config).then(res => {
+    $("#description").text("Signed in!");
+  }).catch(err => {
+    $("#description").text("Something went wrong with signing in.\nPlease clear your cookies, then try again.");
+  });
 }
 
 const signOut = () => {
   var auth2 = gapi.auth2.getAuthInstance();
-  auth2.signOut().then(function () {
-    console.log('User signed out.');
+  auth2.signOut().then(() => {
+    $("#description").text("Signed out.");
   });
 }
