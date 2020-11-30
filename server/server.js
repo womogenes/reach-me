@@ -8,6 +8,7 @@ const cors = require('cors');
 
 const app = express();
 require('./file-server.js')(app);
+require('./stuff.js')(app);
 
 const {OAuth2Client} = require('google-auth-library');
 const client = new OAuth2Client('387693423309-jfkf520pn2liuv0qa7l2eh3hkij4s6v6.apps.googleusercontent.com');
@@ -28,8 +29,22 @@ console.debug('Server listening on port ' + port);
 
 /* SETUP */
 
+// Session stuff
+app.use(session({
+  resave: false,
+  saveUninitialized: false,
+  secret: SESS_SECRET,
+  cookie: {
+    maxAge: 1000 * 60 * 60 * 2,
+    sameSite: true,
+    secure: IN_PROD
+  }
+}));
+
+
 // VARIABLES
 const users = {};
+const sessions = {};
 // VARIABLES
 
 const verify = async (token, res) => {
@@ -61,18 +76,8 @@ const verify = async (token, res) => {
 
 // Backend verification stuff
 app.post('/login', (req, res) => {
+  console.log(req.session);
+  
   const token = req.body.idToken;
   verify(token, res);
 });
-
-// Session stuff
-app.use(session({
-  resave: false,
-  saveUninitialized: false,
-  secret: SESS_SECRET,
-  cookie: {
-    maxAge: 1000 * 60 * 60 * 2,
-    sameSite: true,
-    secure: IN_PROD
-  }
-}));

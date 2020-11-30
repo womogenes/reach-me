@@ -1,3 +1,5 @@
+const hostname = 'http://localhost:3000';
+
 function onSignIn(googleUser) {
 
   var profile = googleUser.getBasicProfile();
@@ -16,10 +18,13 @@ function onSignIn(googleUser) {
     'idToken': idToken
   };
 
-  axios.post('http://localhost:3000/login', data, config).then(res => {
+  axios.post(new URL('/login', hostname), data, config).then(res => {
     $("#description").text("Signed in!");
+    window.location.href = '/dashboard.html';
+
   }).catch(err => {
     $("#description").text("Something went wrong with signing in.\nPlease clear your cookies, then try again.");
+    console.log(err);
   });
 }
 
