@@ -15,6 +15,7 @@ module.exports = ({ app, users }) => {
 
   // Session stuff
   app.use(session({
+    name: "awesomename",
     resave: false,
     saveUninitialized: false,
     secret: SESS_SECRET,
@@ -25,10 +26,18 @@ module.exports = ({ app, users }) => {
     }
   }));
 
-  const verify = async (token, res) => {
-    if (true) { //try {
+  // ROUTES
+
+  // Backend verification stuff
+  app.post('/login', (req, res, next) => {
+    next();
+  });
+
+  app.use('/login', async (req, res) => {
+    console.log("session:", req.session);
+    try {
       const ticket = await client.verifyIdToken({
-        idToken: token,
+        idToken: req.body.idToken,
         audience: '387693423309-jfkf520pn2liuv0qa7l2eh3hkij4s6v6.apps.googleusercontent.com',
       });
       const payload = ticket.getPayload();
@@ -42,22 +51,10 @@ module.exports = ({ app, users }) => {
       }
       users[userid] = u;
 
-      //console.log(users);
-
-      res.status(200).send();
+      res.sendStatus(200);
       
-    } else { //} catch {
-      res.status(400).send();
+    } catch {
+      res.sendStatus(400);
     }
-  };
-
-  // ROUTES
-
-  // Backend verification stuff
-  app.post('/login', (req, res) => {
-    console.log(req.session);
-    
-    const token = req.body.idToken;
-    verify(token, res);
   });
 };
