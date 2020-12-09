@@ -1,7 +1,10 @@
 const session = require('express-session');
-const sessions = {};
-
+const MongoStore = require('connect-mongo')(session);
+const mongoose = require('mongoose');
+const { v4: uuidv4 } = require('uuid');
 const {OAuth2Client} = require('google-auth-library');
+
+const sessions = {}; // USE THIS AS A TEMPORARY DATABASE
 const client = new OAuth2Client('387693423309-jfkf520pn2liuv0qa7l2eh3hkij4s6v6.apps.googleusercontent.com');
 
 const {
@@ -20,28 +23,23 @@ module.exports = ({ app, users }) => {
     saveUninitialized: false,
     secret: SESS_SECRET,
     cookie: {
-      maxAge: 1000 * 60 * 60 * 2,
+      maxAge: 1000 * 60 * 60 * 2, // Two hours
       sameSite: true,
       secure: IN_PROD
-    }
+    },
+    store: new MongoStore({'url': 'mongodb://localhost:27017/sessions'})
   }));
 
-  // ROUTES
-
   // Backend verification stuff
-  app.post('/login', (req, res, next) => {
-    next();
-  });
-
-  app.use('/login', async (req, res) => {
+  app.post('/login', async function(req, res, next) {
     console.log("session:", req.session);
-    try {
+    if (true) { //try {
       const ticket = await client.verifyIdToken({
         idToken: req.body.idToken,
         audience: '387693423309-jfkf520pn2liuv0qa7l2eh3hkij4s6v6.apps.googleusercontent.com',
       });
       const payload = ticket.getPayload();
-      const userid = payload['sub'];
+      const userID = payload['sub'];
       const domain = payload['hd'];
 
       const u = {
@@ -49,11 +47,13 @@ module.exports = ({ app, users }) => {
         email: payload['email'],
         picture: payload['picture']
       }
-      users[userid] = u;
+      users[userID] = u;
+
+      req.session.userID = userID;
 
       res.sendStatus(200);
       
-    } catch {
+    } else { // catch {
       res.sendStatus(400);
     }
   });
