@@ -6,9 +6,13 @@ const http = require('http');
 const path = require('path');
 const cors = require('cors');
 const mongoose = require('mongoose');
+const bodyParser = require('body-parser');
 
 const app = express();
 const users = {};
+
+// Global middleware
+app.use(bodyParser.json());
 
 require('./auth-server.js')({ app, users });
 require('./file-server.js')(app);

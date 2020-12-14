@@ -15,12 +15,12 @@ function onSignIn(googleUser) {
     }
   };
   let data = {
-    'idToken': idToken
+    idToken: idToken
   };
 
   axios.post(new URL('/login', hostname), data, config).then(res => {
     $("#description").text("Signed in!");
-    //window.location.href = '/dashboard.html';
+    window.location.href = '/dashboard.html';
 
   }).catch(err => {
     $("#description").text("Something went wrong with signing in.\nPlease clear your cookies, then try again.");

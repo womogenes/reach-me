@@ -31,9 +31,10 @@ module.exports = ({ app, users }) => {
   }));
 
   // Backend verification stuff
-  app.post('/login', async function(req, res, next) {
+  app.post('/login', async function(req, res) {
     console.log("session:", req.session);
-    if (true) { //try {
+
+    try {
       const ticket = await client.verifyIdToken({
         idToken: req.body.idToken,
         audience: '387693423309-jfkf520pn2liuv0qa7l2eh3hkij4s6v6.apps.googleusercontent.com',
@@ -51,9 +52,11 @@ module.exports = ({ app, users }) => {
 
       req.session.userID = userID;
 
-      res.sendStatus(200);
+      res.status(200);
+      res.redirect('/dashboard');
+      res.end();
       
-    } else { // catch {
+    } catch {
       res.sendStatus(400);
     }
   });
