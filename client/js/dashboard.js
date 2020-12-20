@@ -1,5 +1,9 @@
 const hostname = 'http://localhost:3000';
 
 axios.get(new URL('/dashboard', hostname)).then(res => {
-  console.log(res.data);
+  console.log(res);
+
+  $("#profile-name").text(res.data.name);
+  $("#profile-email").text(res.data.email);
+  $("#profile-picture").attr("src", res.data.picture);
 });
