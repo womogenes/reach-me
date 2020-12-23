@@ -5,17 +5,7 @@ const client = new OAuth2Client('387693423309-jfkf520pn2liuv0qa7l2eh3hkij4s6v6.a
 module.exports = ({ app, userdb }) => {
   // Backend verification stuff
 
-  // Redirect to login
-  const redirectLogin = (req, res, next) => {
-    if (!req.session.userID) {
-      res.redirect('/login');
-    } else {
-      next();
-    }
-  };
-  app.use('/dashboard', redirectLogin);
-
-  app.post('/login', async function(req, res) {
+  app.post('/login', async function (req, res) {
     if (true) { //try {
       const ticket = await client.verifyIdToken({
         idToken: req.body.idToken,
@@ -31,7 +21,7 @@ module.exports = ({ app, userdb }) => {
         email: payload['email'],
         picture: payload['picture']
       });
-
+      
       user.save((err, user) => {
         console.log(`User ${user} saved to database.`);
       });
@@ -39,7 +29,6 @@ module.exports = ({ app, userdb }) => {
       
       res.status(200);
       res.redirect('/dashboard');
-      console.log('redirected');
       res.end();
       
     } else { // } catch {

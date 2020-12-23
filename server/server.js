@@ -9,6 +9,7 @@ let {
   userdb
 } = require('./database/database.js')();
 require('./middleware.js')({ app, userdb });
+require('./redirects.js')(app);
 require('./file-server.js')(app);
 require('./pages.js')(app);
 require('./auth-server.js')({ app, userdb });
