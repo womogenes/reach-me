@@ -17,9 +17,10 @@ app.use(bodyParser.json());
 let {
   userdb
 } = require('./database/database.js')();
+require('./middleware.js')({ app, userdb });
 require('./auth-server.js')({ app, userdb });
-require('./file-server.js')(app);
 require('./user-info.js')({ app, userdb });
+require('./file-server.js')(app);
 
 // Start the server
 const server = http.createServer(app);
