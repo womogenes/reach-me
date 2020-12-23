@@ -1,7 +1,5 @@
 module.exports = ({ app, userdb }) => {
-  app.get('/dashboard', (req, res) => {
-    console.log('dashboard session:', req.session);
-    
+  app.get('/my-info', (req, res) => {    
     user = res.locals.user;
     res.json({
       name: user.name,

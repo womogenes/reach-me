@@ -1,12 +1,21 @@
-const {OAuth2Client} = require('google-auth-library');
+const { OAuth2Client } = require('google-auth-library');
 
 const client = new OAuth2Client('387693423309-jfkf520pn2liuv0qa7l2eh3hkij4s6v6.apps.googleusercontent.com');
 
 module.exports = ({ app, userdb }) => {
   // Backend verification stuff
-  app.post('/login', async function(req, res) {
-    console.log('session:', req.session);
 
+  // Redirect to login
+  const redirectLogin = (req, res, next) => {
+    if (!req.session.userID) {
+      res.redirect('/login');
+    } else {
+      next();
+    }
+  };
+  app.use('/dashboard', redirectLogin);
+
+  app.post('/login', async function(req, res) {
     if (true) { //try {
       const ticket = await client.verifyIdToken({
         idToken: req.body.idToken,
@@ -23,17 +32,14 @@ module.exports = ({ app, userdb }) => {
         picture: payload['picture']
       });
 
-      // TODOOOOOOOOOOOOOOOO
       user.save((err, user) => {
-        console.log(`User ${user} saved to database.`)
+        console.log(`User ${user} saved to database.`);
       });
-      
-      // TODO: Add user to database if not exist
-
       req.session.userID = userID;
-
+      
       res.status(200);
       res.redirect('/dashboard');
+      console.log('redirected');
       res.end();
       
     } else { // } catch {

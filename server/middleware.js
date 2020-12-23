@@ -1,11 +1,14 @@
 const session = require('express-session');
 const MongoStore = require('connect-mongo')(session);
-const mongoose = require('mongoose');
+const bodyParser = require('body-parser');
 
 module.exports = ({ app, userdb }) => {
+  // bodyParser!
+  app.use(bodyParser.json());
+
   // Session stuff
   app.use(session({
-    name: "awesomename",
+    name: 'awesomename',
     resave: false,
     saveUninitialized: false,
     secret: process.env.SESS_SECRET,

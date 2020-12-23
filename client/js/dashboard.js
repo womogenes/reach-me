@@ -1,6 +1,6 @@
 const hostname = 'http://localhost:3000';
 
-axios.get(new URL('/dashboard', hostname)).then(res => {
+axios.get(new URL('/my-info', hostname)).then(res => {
   console.log(res);
 
   $("#profile-name").text(res.data.name);
