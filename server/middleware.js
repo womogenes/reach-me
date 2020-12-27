@@ -1,10 +1,14 @@
 const session = require('express-session');
-const MongoStore = require('connect-mongo')(session);
 const bodyParser = require('body-parser');
+const cors = require('cors');
+const express = require('express');
+const MongoStore = require('connect-mongo')(session);
 
 module.exports = ({ app, userdb }) => {
   // bodyParser!
   app.use(bodyParser.json());
+  app.use(express.json());
+  app.use(cors());
 
   // Session stuff
   app.use(session({
@@ -13,30 +17,10 @@ module.exports = ({ app, userdb }) => {
     saveUninitialized: false,
     secret: process.env.SESS_SECRET,
     cookie: {
-      maxAge: 1000 * 60 * 60 * 2, // Two hours
+      maxAge: 1000 * 60 * 2, // Two minutes!
       sameSite: true,
       secure: process.env.IN_PROD === 'prod'
     },
     store: new MongoStore({'url': 'mongodb://localhost:27017/sessions'})
   }));
-
-  // Getting user every time
-  app.use((req, res, next) => {
-    if (!req.session) {
-      res.locals.user = null;
-    }
-
-    const { userID } = req.session;
-
-    if (userID) {
-      userdb.model('User').findOne({ 'userID': userID }, (err, user) => {
-        res.locals.user = user;
-        next();
-      });
-
-    } else {
-      res.locals.user = null;
-      next();
-    }
-  });
 };

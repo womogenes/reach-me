@@ -1,7 +1,6 @@
 const hostname = 'http://localhost:3000';
 
 function onSignIn(googleUser) {
-
   var profile = googleUser.getBasicProfile();
   console.log('ID: ' + profile.getId());
   console.log('Name: ' + profile.getName());
@@ -30,6 +29,8 @@ function onSignIn(googleUser) {
 const signOut = () => {
   var auth2 = gapi.auth2.getAuthInstance();
   auth2.signOut().then(() => {
-    $("#description").text("Signed out.");
+    axios.post(new URL('/logout', hostname).then(res => {
+      $("#description").text("Signed out.");
+    }));
   });
 }

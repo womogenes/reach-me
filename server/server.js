@@ -13,7 +13,10 @@ require('./redirects.js')(app);
 require('./file-server.js')(app);
 require('./pages.js')(app);
 require('./auth-server.js')({ app, userdb });
-require('./user-info.js')({ app, userdb });
+
+require('./page-info/my-info.js')({ app, userdb });
+require('./page-info/profiles.js')({ app, userdb });
+require('./page-info/all-users.js')({ app, userdb });
 
 // Start the server
 const server = http.createServer(app);

@@ -1,4 +1,5 @@
 const { OAuth2Client } = require('google-auth-library');
+const { redirectLogin, redirectDashboard } = require('./redirects.js')();
 
 const client = new OAuth2Client('387693423309-jfkf520pn2liuv0qa7l2eh3hkij4s6v6.apps.googleusercontent.com');
 
@@ -34,5 +35,9 @@ module.exports = ({ app, userdb }) => {
     } else { // } catch {
       res.sendStatus(400);
     }
+  });
+
+  app.post('/logout', (req, res) => {
+    req.session.destroy();
   });
 };

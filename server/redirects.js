@@ -1,28 +1,23 @@
 module.exports = (app) => {
   // Redirect to login
   const redirectLogin = (req, res, next) => {
-    console.log('redirected login');
-    if (!req.session.userID) {
+    if (!req.session.userID && req.originalUrl != '/login') {
+      console.log(req.originalUrl, req.session);
       res.redirect('/login');
-      res.end();
-
     } else {
       next();
-    };
+    }
   };
   const redirectDashboard = (req, res, next) => {
-    console.log('redirected dashboard');
-    if (req.session.userID) {
+    if (req.session.userID && req.originalUrl != '/dashboard') {
       res.redirect('/dashboard');
-      res.end();
-
     } else {
       next();
-    };
+    }
   };
-  app.use('/dashboard', redirectLogin);
-  app.use('/login', redirectDashboard);
 
-  app.use(/\//, redirectLogin);
-  app.use(/\//, redirectDashboard);
-}
+  return {
+    redirectLogin: redirectLogin,
+    redirectDashboard: redirectDashboard
+  };
+};
