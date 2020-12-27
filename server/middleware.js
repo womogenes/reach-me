@@ -17,7 +17,7 @@ module.exports = ({ app, userdb }) => {
     saveUninitialized: false,
     secret: process.env.SESS_SECRET,
     cookie: {
-      maxAge: 1000 * 60 * 2, // Two minutes!
+      maxAge: 1000 * 60 * 60 * 2, // Two hours!
       sameSite: true,
       secure: process.env.IN_PROD === 'prod'
     },

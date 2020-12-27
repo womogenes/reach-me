@@ -17,7 +17,6 @@ axios.get(new URL('/all-users', hostname)).then(res => {
       class: 'user-link'
     });
     userDiv.append(userLink);
-    userDiv.append('<br><br>');
 
     $('#user-list').append(userDiv);
   });

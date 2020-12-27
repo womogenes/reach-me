@@ -16,16 +16,19 @@ module.exports = ({ app, userdb }) => {
       const userID = payload['sub'];
       const domain = payload['hd'];
 
-      const user = userdb.model('User')({
-        userID: payload['sub'],
-        name: payload['name'],
-        email: payload['email'],
-        picture: payload['picture']
-      });
-      
-      user.save((err, user) => {
-        console.log(`User ${user} saved to database.`);
-      });
+      if (!await userdb.model('User').exists({ userID: userID })) {
+        const user = userdb.model('User')({
+          userID: payload['sub'],
+          name: payload['name'],
+          email: payload['email'],
+          picture: payload['picture']
+        });
+        
+        user.save((err, user) => {
+          console.log(`User ${user} saved to database.`);
+        });
+      }
+
       req.session.userID = userID;
       
       res.status(200);

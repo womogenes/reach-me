@@ -13,7 +13,7 @@ module.exports = (app) => {
     res.sendFile(path.resolve(('client/login.html')));
   });
 
-  app.get('/directory', (req, res) => {
+  app.get('/directory', redirectLogin, (req, res) => {
     res.sendFile(path.resolve(('client/directory.html')));
   });
 
