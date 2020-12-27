@@ -4,6 +4,8 @@
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0">
 
+    <base href='http://localhost:3000'>
+
     <!-- Google stuff -->
     <script src="https://apis.google.com/js/platform.js" async defer></script>
     <meta name="google-signin-client_id" content="387693423309-jfkf520pn2liuv0qa7l2eh3hkij4s6v6.apps.googleusercontent.com">
@@ -17,7 +19,7 @@
     <link href="https://fonts.googleapis.com/css2?family=Open+Sans&display=swap" rel="stylesheet">
 
     <!-- Our own scripts -->
-    <script type="text/javascript" src="js/login.js" defer></script>
+    <script type="text/javascript" src="js/user-profile.js" defer></script>
 
     <!-- Stylesheets -->
     <link rel=stylesheet href="css/main.css">
@@ -28,14 +30,27 @@
   <body>
 
     <div id="main-content">
-      <h2 id="main-header">ReachMe</h2>
+      <h2 id="main-header">User Profile</h2>
+      <div id="profile">
 
-      <p id="description">Please sign in using the button below.</p><br />
-      <div class="g-signin2" data-onsuccess="onSignIn"></div>
-      <br>
+        <b>Picture</b>
+        <br>
+        <img id="profile-picture"></img>
+        <br><br>
+        
+        <b>Name</b>
+        <p id="profile-name"></p>
+        <br>
 
-      <button id="signout-button" href="#" onclick="signOut();">Sign out</button>
-    </div>
+        <b>Email</b>
+        <p id="profile-email"></p>
+        <br>
+        
+      </div>
+
+      <a href="/directory">Find other people</a>
+
+    </did>
 
   </body>
 </html>

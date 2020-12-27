@@ -18,7 +18,7 @@ module.exports = ({ app, userdb }) => {
 
       if (!await userdb.model('User').exists({ userID: userID })) {
         const user = userdb.model('User')({
-          userID: payload['sub'],
+          userID: userID,
           name: payload['name'],
           email: payload['email'],
           picture: payload['picture']
@@ -29,7 +29,7 @@ module.exports = ({ app, userdb }) => {
         });
       }
 
-      req.session.userID = userID;
+      req.session.userID = parseInt(userID);
       
       res.status(200);
       res.redirect('/dashboard');

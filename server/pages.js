@@ -17,6 +17,10 @@ module.exports = (app) => {
     res.sendFile(path.resolve(('client/directory.html')));
   });
 
+  app.get('/user/:userID', redirectLogin, (req, res) => {
+    res.sendFile(path.resolve(('client/user-profile.html')));
+  });
+
   app.get('/', (req, res) => {
     if (req.session.userID) {
       res.redirect('/dashboard');

@@ -1,7 +1,8 @@
 const hostname = 'http://localhost:3000';
 
 axios.get(new URL('/all-users', hostname)).then(res => {
-
+  console.log(res.data);
+  
   res.data.forEach(user => {
     const userDiv = $('<div>', {
       class: 'user-div'
