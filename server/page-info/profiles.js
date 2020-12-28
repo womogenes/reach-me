@@ -1,10 +1,11 @@
 module.exports = ({ app, userdb }) => {
   app.get('/user-info/:userID', (req, res) => {
-    const reqID = parseInt(req.params.userID);
+    const reqID = req.params.userID;
  
     // If the user requests themselves, redirect to dashboard
     if (reqID === req.session.userID) {
       res.sendStatus(308);
+      return;
     }
 
     // Otherwise, get the requested user

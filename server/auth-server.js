@@ -13,14 +13,16 @@ module.exports = ({ app, userdb }) => {
         audience: '387693423309-jfkf520pn2liuv0qa7l2eh3hkij4s6v6.apps.googleusercontent.com',
       });
       const payload = ticket.getPayload();
-      const userID = payload['sub'];
       const domain = payload['hd'];
+      const email = payload['email'];
 
-      if (!await userdb.model('User').exists({ userID: userID })) {
+      // TODO: assert domain is proper
+
+      if (!await userdb.model('User').exists({ email: email })) {
         const user = userdb.model('User')({
-          userID: userID,
+          userID: email,
           name: payload['name'],
-          email: payload['email'],
+          email: email,
           picture: payload['picture']
         });
         
@@ -29,7 +31,7 @@ module.exports = ({ app, userdb }) => {
         });
       }
 
-      req.session.userID = parseInt(userID);
+      req.session.userID = email;
       
       res.status(200);
       res.redirect('/dashboard');
