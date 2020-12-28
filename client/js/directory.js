@@ -21,4 +21,4 @@ axios.get(new URL('/all-users', hostname)).then(res => {
 
     $('#user-list').append(userDiv);
   });
-});
+}); 

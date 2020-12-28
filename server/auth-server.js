@@ -1,7 +1,7 @@
 const { OAuth2Client } = require('google-auth-library');
 const { redirectLogin, redirectDashboard } = require('./redirects.js')();
 
-const client = new OAuth2Client('387693423309-jfkf520pn2liuv0qa7l2eh3hkij4s6v6.apps.googleusercontent.com');
+const client = new OAuth2Client(process.env.GOOGLE_CLIENT_ID);
 
 module.exports = ({ app, userdb }) => {
   // Backend verification stuff
@@ -10,7 +10,7 @@ module.exports = ({ app, userdb }) => {
     if (true) { //try {
       const ticket = await client.verifyIdToken({
         idToken: req.body.idToken,
-        audience: '387693423309-jfkf520pn2liuv0qa7l2eh3hkij4s6v6.apps.googleusercontent.com',
+        audience: process.env.GOOGLE_CLIENT_ID,
       });
       const payload = ticket.getPayload();
       const domain = payload['hd'];
