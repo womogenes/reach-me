@@ -22,10 +22,6 @@ module.exports = (app) => {
   });
 
   app.get('/', (req, res) => {
-    if (req.session.userID) {
-      res.redirect('/dashboard');
-    } else {
-      res.redirect('/login');
-    }
+    res.sendFile(path.resolve(('client/index.html')));
   });
 };
