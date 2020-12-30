@@ -4,7 +4,10 @@ module.exports = ({ app, userdb }) => {
   
     if (userID) {
       userdb.model('User').findOne({ 'userID': userID }, (err, user) => {
-        if (!user) res.redirect('/login');
+        if (!user) {
+          res.redirect('/login');
+          return;
+        };
         
         res.json({
           name: user.name,
