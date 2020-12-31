@@ -7,15 +7,17 @@ const app = express();
 
 let {
   userdb
-} = require('./database/database.js')();
+} = require('./database/userdb.js')();
 require('./middleware.js')({ app, userdb });
 require('./auth-server.js')({ app, userdb });
-require('./file-server.js')(app);
 require('./pages.js')(app);
 
 require('./page-info/my-info.js')({ app, userdb });
 require('./page-info/profiles.js')({ app, userdb });
-require('./page-info/all-users.js')({ app, userdb });
+require('./page-info/all-users.js')({ app, userdb })
+require('./page-info/my-bio.js')({ app, userdb });
+
+require('./file-server.js')(app); // At the end because this uses the '/' path
 
 // Start the server
 const server = http.createServer(app);

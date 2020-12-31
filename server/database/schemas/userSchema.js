@@ -6,8 +6,7 @@ let userSchema = new mongoose.Schema({
   name: { type: String, default: "My name" },
   picture: { type: String, default: "URL to pfp" },
   tags: { type: [String], default: [] },
-  talkedTo: { type: [Number], default: [] },
-  badges: { type: [String], default: [] }
+  bio: { type: String, default: "" },
 }, {
   collection: 'users'
 });

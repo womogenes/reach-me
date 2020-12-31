@@ -2,8 +2,8 @@ const mongoose = require('mongoose');
 const fs = require('fs');
 
 // Connect to database
-const mongoURI = `mongodb+srv://server:${process.env.MONGO_ATLAS_PASSWORD}@reach-me.wwawg.mongodb.net/users?retryWrites=true&w=majority`;
-const userdb = mongoose.createConnection(mongoURI, {
+const usersdbURI = `mongodb+srv://server:${process.env.MONGO_ATLAS_PASSWORD}@reach-me.wwawg.mongodb.net/users?retryWrites=true&w=majority`;
+const userdb = mongoose.createConnection(usersdbURI, {
   useNewUrlParser: true,
   useUnifiedTopology: true,
   useCreateIndex: true

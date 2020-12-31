@@ -17,6 +17,7 @@
 
     <!-- Stylesheets -->
     <link rel=stylesheet href="css/main.css">
+    <link rel=stylesheet href="css/dashboard.css">
 
     <title>Hello</title>
   </head>
@@ -39,6 +40,16 @@
         <b>Your email</b>
         <p id="profile-email"></p>
         <br>
+
+        <b>Your bio</b>
+        <p id="profile-bio"></p>
+        <br>
+
+        <form id="bio-edit-form" onsubmit="editBio(event)">
+          <label for="bio-input">Edit your bio:</label><br>
+          <textarea id="bio-input" type="text" form="bio-edit-form"></textarea>
+          <input id="bio-edit-submit-button" type="submit" value="Submit">
+        </form>
         
       </div>
 

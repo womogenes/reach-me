@@ -1,19 +1,18 @@
 module.exports = ({ app, userdb }) => {
-  app.get('/my-info', (req, res) => {
+  app.get('/my-info', async (req, res) => {
     const { userID } = req.session;
   
     if (userID) {
-      userdb.model('User').findOne({ 'userID': userID }, (err, user) => {
-        if (!user) {
-          res.redirect('/login');
-          return;
-        };
-        
-        res.json({
-          name: user.name,
-          email: user.email,
-          picture: user.picture
-        });
+      const user = await userdb.model('User').findOne({ 'userID': userID });
+      if (!user) {
+        res.redirect('/login');
+        return;
+      };
+      
+      res.json({
+        name: user.name,
+        email: user.email,
+        picture: user.picture
       });
   
     } else {
