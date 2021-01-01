@@ -1,5 +1,14 @@
+textarea {
+  max-width: 100%;
+}
+
+#main-content {
+  padding: 10px;
+  box-sizing: border-box;
+}
+
 #profile {
-  width: 60%;
+  width: 80%;
 }
 
 #bio-edit-form {
@@ -22,4 +31,8 @@
 #bio-edit-status {
   color: #2f962c;
   margin-bottom: 20px;
+}
+
+#directory-link {
+  margin-bottom: 15px;
 }
