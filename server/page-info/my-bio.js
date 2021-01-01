@@ -1,12 +1,8 @@
-module.exports = ({ app, userdb }) => {
+const { authCheck } = require('../auth/auth-check.js')();
 
-  app.get('/my-bio', async (req, res) => {
+module.exports = ({ app, userdb }) => {
+  app.get('/my-bio', authCheck, async (req, res) => {
     const { userID } = req.session;
-  
-    if (!userID) {
-      res.sendStatus(401);
-      return;
-    }
 
     const user = await userdb.model('Bio').findOne({ 'userID': userID });
 

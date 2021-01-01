@@ -1,5 +1,9 @@
+const { auth } = require('google-auth-library');
+
+const { authCheck } = require('../auth/auth-check.js')();
+
 module.exports = ({ app, userdb }) => {
-  app.get('/my-info', async (req, res) => {
+  app.get('/my-info', authCheck, async (req, res) => {
     const { userID } = req.session;
   
     if (userID) {

@@ -1,5 +1,5 @@
 const { OAuth2Client } = require('google-auth-library');
-const { redirectLogin, redirectDashboard } = require('./redirects.js')();
+const { redirectLogin, redirectDashboard } = require('../redirects.js')();
 const session = require('express-session');
 const MongoStore = require('connect-mongo')(session);
 

@@ -1,5 +1,7 @@
+const { authCheck } = require('../auth/auth-check.js')();
+
 module.exports = ({ app, userdb }) => {
-  app.get('/user-info/:userID', (req, res) => {
+  app.get('/user-info/:userID', authCheck, (req, res) => {
     const reqID = req.params.userID;
  
     // If the user requests themselves, redirect to dashboard

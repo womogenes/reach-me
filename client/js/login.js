@@ -18,10 +18,10 @@ function onSignIn(googleUser) {
   };
 
   axios.post(new URL('/login', hostname), data, config).then(res => {
-    $("#description").text("Signed in!");
+    $('#description').text('Signed in!');
     window.location.href = '/dashboard';
   }).catch(err => {
-    $("#description").text("Something went wrong with signing in.\nPlease clear your cookies, then try again.");
+    $('#description').text('Something went wrong with signing in.\nPlease clear your cookies, then try again.');
     console.log(err);
   });
 }
@@ -30,7 +30,7 @@ const signOut = () => {
   var auth2 = gapi.auth2.getAuthInstance();
   auth2.signOut().then(() => {
     axios.post(new URL('/logout', hostname).then(res => {
-      $("#description").text("Signed out.");
+      $('#description').text('Signed out.');
     }));
   });
 }

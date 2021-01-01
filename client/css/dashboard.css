@@ -14,3 +14,12 @@
   margin-top: 5px;
   margin-bottom: 10px;
 }
+
+#bio-edit-submit-button {
+  cursor: pointer;
+}
+
+#bio-edit-status {
+  color: #2f962c;
+  margin-bottom: 20px;
+}

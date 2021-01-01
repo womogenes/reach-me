@@ -1,5 +1,8 @@
+const { authCheck } = require('../auth/auth-check.js')();
+
 module.exports = ({ app, userdb }) => {
-  app.get('/all-users', async (req, res) => {
+  app.get('/all-users', authCheck, async (req, res) => {
+
     const users = await userdb.model('User').find({});
     const toReturn = users.map(user => {
       return {
