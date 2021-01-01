@@ -100,7 +100,7 @@ Returns something like this:
 
 ```json
 {
-    "userID": "williamf24@lakesideschool.org"
+    "userID": "williamf24@lakesideschool.org",
     "name": "William Feng",
     "email": "williamf24@lakesideschool.org",
     "picture": "https://lh3.googleusercontent.com/a-/AOh1...",
