@@ -28,9 +28,9 @@ Logs the client in. Data should be a JSON object with a singular key `idToken` a
 
 Example data:
 
-```javascript
+```json
 {
-    idToken: "eyJ...Vxw"
+    "idToken": "eyJ...Vxw"
 }
 ```
 
@@ -48,9 +48,9 @@ Logs the client out. No data to be sent, just removes authorization from the Goo
 
 Changes the user's pending bio. This will only change publicly displayed bio once approved. Payload looks like this:
 
-```javascript
+```json
 {
-    newBio: "Hello this is my awesome bio"
+    "newBio": "Hello this is my awesome bio"
 }
 ```
 
@@ -68,11 +68,11 @@ Returns a JSON object with information about the user themselves! Has `email`, `
 
 Example response data:
 
-```javascript
+```json
 {
-    email: "williamf24@lakesideschool.org",
-    name: "William Feng",
-    picture: "https://lh3.googleusercontent.com/a-/AOh1..."
+    "email": "williamf24@lakesideschool.org",
+    "name": "William Feng",
+    "picture": "https://lh3.googleusercontent.com/a-/AOh1..."
 }
 ```
 
@@ -82,9 +82,9 @@ Example response data:
 
 Returns the user's bio in the following format:
 
-```javascript
+```json
 {
-    bio: "Hello I like dogs"
+    "bio": "Hello I like dogs"
 }
 ```
 
@@ -98,13 +98,13 @@ Users **cannot** request their own information with this endpoint. It will retur
 
 Returns something like this:
 
-```javascript
+```json
 {
-    userID: "williamf24@lakesideschool.org"
-    name: "William Feng",
-    email: "williamf24@lakesideschool.org",
-    picture: "https://lh3.googleusercontent.com/a-/AOh1...",
-    tags: [],
+    "userID": "williamf24@lakesideschool.org"
+    "name": "William Feng",
+    "email": "williamf24@lakesideschool.org",
+    "picture": "https://lh3.googleusercontent.com/a-/AOh1...",
+    "tags": [],
 }
 ```
 
@@ -118,10 +118,10 @@ Again, this **cannot** be used on the user themselves and will return a 400 code
 
 The reply is pretty simple:
 
-```javascript
+```json
 {
-    userID: "williamf24@lakesideschool.org",
-    bio: "My fantastic bio"
+    "userID": "williamf24@lakesideschool.org",
+    "bio": "My fantastic bio"
 }
 ```
 
@@ -135,12 +135,12 @@ Returns an array containing information about all users. This should probably be
 
 Each element in the array looks like this:
 
-```javascript
+```json
 {
-    userID: "williamfeng1729@gmail.com",
-    name: "William Y. Feng",
-    picture: "https://lh3.googleusercontent.com/a-/AOh1...",
-    tags: []
+    "userID": "williamfeng1729@gmail.com",
+    "name": "William Y. Feng",
+    "picture": "https://lh3.googleusercontent.com/a-/AOh1...",
+    "tags": []
 }
 ```
 
@@ -149,8 +149,3 @@ Each element in the array looks like this:
 `tags` is an array of strings (but I haven't implemented this yet!)
 
 `userID` is the person's user ID, which for now is just their email but that might change.
-
-
-
-## Admin
-
