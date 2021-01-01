@@ -1,7 +1,5 @@
 module.exports = ({ adminRouter, userdb }) => {
-  const { adminCheck } = require('../auth/admin-check.js')({ userdb });
-
-  adminRouter.use('/pending-bios', adminCheck, async (req, res) => {
+  adminRouter.use('/pending-bios', async (req, res) => {
     const pendingBios = await userdb.model('PendingBio').find({}, null, { sort: { updatedAt: 1 } });
     res.json(pendingBios.map(bio => {
       return {

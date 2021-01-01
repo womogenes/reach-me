@@ -12,6 +12,12 @@
   width: 100%;
 }
 
+.profile-link {
+  display: inline-block;
+  margin-bottom: 10px;
+}
+
 .approve-button {
-  
+  margin-top: 20px;
+  font-size: 10pt;
 }

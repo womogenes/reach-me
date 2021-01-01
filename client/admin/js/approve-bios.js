@@ -1,8 +1,12 @@
 const hostname = 'http://localhost:3000';
 
 const approveBio = (userID) => {
-  axios.post(new URL(`/admin/${userID}`, hostname), res => {
-    // Approved!
+  axios.post(new URL(`/admin/approve-bio/${userID}`, hostname)).then(res => {
+    console.log(res);
+    if (res.status === 204) {
+      const toRemove = $(`#bio-div-${userID}`.replace( /(:|\.|\[|\]|,|=|@)/g, "\\$1" ));
+      toRemove.remove();
+    }
   });
 }
 
@@ -11,7 +15,8 @@ axios.get(new URL('/admin/pending-bios', hostname)).then(res => {
   
   res.data.forEach(pendingBio => {
     const bioDiv = $('<div>', {
-      class: 'bio-div'
+      class: 'bio-div',
+      id: `bio-div-${pendingBio.userID}`
     });
     const profileLink = $('<a>', {
       text: pendingBio.userID,

@@ -13,7 +13,38 @@ body {
 }
 
 p {
-  margin: 2px 0;
+  margin: 5px 0;
+}
+
+textarea {
+  padding: 10px;
+  border-radius: 5px;
+}
+
+button, input[type="submit"] {
+  border: 1px solid #000000;
+  border-radius: 4px;
+  padding: 0.3em 1em;
+  padding-top: 0.4em;
+  margin: 0;
+  text-decoration: none;
+  background: #f0f0f0;
+  color: #000000;
+  font-family: sans-serif;
+  font-size: 1rem;
+  cursor: pointer;
+  text-align: center;
+  -webkit-appearance: none;
+  -moz-appearance: none;
+}
+
+button:hover, input[type="submit"]:hover,
+button:focus, input[type="submit"]:focus {
+  background: #ffffff;
+}
+
+button:active, input[type="submit"]:active {
+  background: #e0e0e0;
 }
 
 #main-content {
