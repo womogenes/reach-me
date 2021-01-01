@@ -4,7 +4,8 @@ let pendingBioSchema = new mongoose.Schema({
   userID: { type: String, index: { unique: true }, required: true },
   bio: { type: String, default: '' }
 }, {
-  collection: 'pendingBios'
+  collection: 'pendingBios',
+  timestamps: true
 });
 pendingBioSchema.index({ userID: 1 }, { unique: true });
 

@@ -19,6 +19,8 @@ require('./page-info/my-bio.js')({ app, userdb });
 
 require('./user-input/edit-bio.js')({ app, userdb });
 
+require('./admin/admin.js')({ app, userdb });
+
 require('./file-server.js')(app); // At the end because this uses the '/' path
 
 // Start the server
