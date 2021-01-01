@@ -1,26 +1,42 @@
 const { authCheck } = require('../auth/auth-check.js')();
 
 module.exports = ({ app, userdb }) => {
-  app.get('/user-info/:userID', authCheck, (req, res) => {
+  app.get('/user-info/:userID', authCheck, async (req, res) => {
     const reqID = req.params.userID;
  
-    // If the user requests themselves, redirect to dashboard
+    // Not allowed for the user to request themselves
     if (reqID === req.session.userID) {
-      res.sendStatus(308);
+      res.sendStatus(400);
       return;
     }
 
     // Otherwise, get the requested user
-    userdb.model('User').findOne({ userID: reqID }, (err, user) => {
-      const userInfo = {
-        userID: user.userID,
-        name: user.name,
-        email: user.email,
-        picture: user.picture,
-        tags: user.tags,
-        badges: user.badges
-      };
-      res.json(userInfo);
-    });
+    const user = await userdb.model('User').findOne({ userID: reqID });
+    const userInfo = {
+      userID: user.userID,
+      name: user.name,
+      email: user.email,
+      picture: user.picture,
+      tags: user.tags
+    };
+    res.json(userInfo);
+  });
+
+  app.get('/user-bio/:userID', authCheck, async (req, res) => {
+    const reqID = req.params.userID;
+ 
+    // Impossible
+    if (reqID === req.session.userID) {
+      res.sendStatus(400);
+      return;
+    }
+
+    // Get the requested user
+    const bio = await userdb.model('Bio').findOne({ userID: reqID });
+    const userBio = {
+      userID: bio.userID,
+      bio: bio.bio
+    };
+    res.json(userBio);
   });
 };
