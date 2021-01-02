@@ -15,7 +15,7 @@ axios.get(new URL('/all-users', hostname)).then(res => {
     userDiv.append(userPicture);
     const userLink = $('<a>', {
       text: user.name,
-      href: `/user/${user.userID}`,
+      href: `/user?userID=${user.userID}`,
       class: 'user-link'
     });
     userDiv.append(userLink);

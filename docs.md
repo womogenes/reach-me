@@ -90,9 +90,11 @@ Returns the user's bio in the following format:
 
 
 
-**GET `/user-info/<userID>`**
+**GET `/user-info?userID=<userID>`**
 
-Gets the information of user with the given `userID`. No data to send in the request, it's all in the URL. This might be used in a page like `/user/williamf24@lakesideschool.org`.
+Gets the information of user with id `<userID>`. Data to send:
+
+This might be used in a page like `/user/williamf24@lakesideschool.org`.
 
 Users **cannot** request their own information with this endpoint. It will return a 400 code if a user tries to do so.
 
@@ -110,7 +112,7 @@ Returns something like this:
 
 
 
-**GET `/user-bio/<userID>`**
+**GET `/user-bio?userID=<userID>`**
 
 Gets the given user's bio.
 

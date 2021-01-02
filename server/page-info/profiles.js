@@ -1,8 +1,8 @@
 const { authCheck } = require('../auth/auth-check.js')();
 
 module.exports = ({ app, userdb }) => {
-  app.get('/user-info/:userID', authCheck, async (req, res) => {
-    const reqID = req.params.userID;
+  app.get('/user-info', authCheck, async (req, res) => {
+    const reqID = req.query.userID;
  
     // Not allowed for the user to request themselves
     if (reqID === req.session.userID) {
@@ -12,6 +12,12 @@ module.exports = ({ app, userdb }) => {
 
     // Otherwise, get the requested user
     const user = await userdb.model('User').findOne({ userID: reqID });
+
+    if (!user) {
+      res.sendStatus(404);
+      return;
+    }
+
     const userInfo = {
       userID: user.userID,
       name: user.name,
@@ -22,12 +28,12 @@ module.exports = ({ app, userdb }) => {
     res.json(userInfo);
   });
 
-  app.get('/user-bio/:userID', authCheck, async (req, res) => {
-    const reqID = req.params.userID;
+  app.get('/user-bio', authCheck, async (req, res) => {
+    const reqID = req.query.userID;
  
     // Impossible
     if (reqID === req.session.userID) {
-      res.sendStatus(400);
+      res.sendStatus(404);
       return;
     }
 
