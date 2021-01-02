@@ -9,7 +9,8 @@ axios.get(new URL('/all-users', hostname)).then(res => {
     });
     const userPicture = $('<img>', {
       src: user.picture,
-      class: 'user-picture'
+      class: 'user-picture',
+      alt: `Image of ${user.name}`
     });
     userDiv.append(userPicture);
     const userLink = $('<a>', {
@@ -21,4 +22,4 @@ axios.get(new URL('/all-users', hostname)).then(res => {
 
     $('#user-list').append(userDiv);
   });
-}); 
+});

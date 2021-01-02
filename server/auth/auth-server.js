@@ -37,6 +37,7 @@ module.exports = ({ app, userdb }) => {
       if (!await userdb.model('User').exists({ email: email })) {
         const user = userdb.model('User')({
           userID: email,
+          googleID: payload['sub'],
           name: payload['name'],
           email: email,
           picture: payload['picture']

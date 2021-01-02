@@ -3,7 +3,10 @@ const hostname = 'http://localhost:3000';
 axios.get(new URL('/my-info', hostname)).then(res => {
   $('#profile-name').text(res.data.name);
   $('#profile-email').text(res.data.email);
-  $('#profile-picture').attr('src', res.data.picture);
+  $('#profile-picture').attr({
+    src: res.data.picture,
+    alt: `Your image`
+  });
 });
 
 axios.get(new URL('/my-bio', hostname)).then(res => {

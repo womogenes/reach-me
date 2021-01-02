@@ -34,8 +34,8 @@ module.exports = ({ app, userdb }) => {
     // Get the requested user
     const bio = await userdb.model('Bio').findOne({ userID: reqID });
     const userBio = {
-      userID: bio.userID,
-      bio: bio.bio
+      userID: reqID,
+      bio: bio ? bio.bio : 'Not written yet!'
     };
     res.json(userBio);
   });
