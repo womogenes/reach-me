@@ -1,0 +1,38 @@
+#main-content {
+  width: 30%;
+}
+
+#profile {
+  width: 100%;
+}
+
+#interaction {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+
+  width: 100%;
+}
+
+#not-talked-to {
+  flex-direction: column;
+  align-items: center;
+  box-sizing: border-box;
+  
+  width: 100%;
+
+  border: 1px solid #000000;
+  border-radius: 5px;
+
+  margin-bottom: 20px;
+  padding: 20px;
+}
+
+#claim-talked-to {
+  margin-top: 10px;
+}
+
+#talked-to {
+  color: #1d5f1a;
+  margin-bottom: 30px;
+}

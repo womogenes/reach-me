@@ -26,4 +26,4 @@ module.exports = ({ app, userdb }) => {
 
     res.sendStatus(204); // No Content successful
   });
-}
+};

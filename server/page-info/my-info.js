@@ -1,5 +1,3 @@
-const { auth } = require('google-auth-library');
-
 const { authCheck } = require('../auth/auth-check.js')();
 
 module.exports = ({ app, userdb }) => {

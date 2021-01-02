@@ -1,6 +1,6 @@
 const { authCheck } = require('../auth/auth-check.js')();
 
-module.exports = ({ app, userdb }) => {
+module.exports = ({ app, userdb, talkedTodb }) => {
   app.get('/user-info', authCheck, async (req, res) => {
     const reqID = req.query.userID;
  
@@ -44,5 +44,37 @@ module.exports = ({ app, userdb }) => {
       bio: bio ? bio.bio : 'Not written yet!'
     };
     res.json(userBio);
+  });
+
+  app.get('/did-talk-to', authCheck, async (req, res) => {
+    const { userID } = req.session;
+    const otherID = req.query.userID;
+
+    // User can't have talked to themselves
+    if (userID === otherID) {
+      res.status(400);
+      return;
+    }
+    
+    const talkedTo = await talkedTodb.model('TalkedTo').findOne({ userID: userID });
+
+    if (talkedTo) {
+      if (talkedTo.talkedTo.includes(otherID)) {
+        res.json({ status: 'yes' });
+
+      } else {
+        const claims = await talkedTodb.model('TalkedToClaims').findOne({ userID: userID });
+
+        if (claims && claims.talkedToClaims.includes(otherID)) {
+          res.json({ status: 'pending' });
+        } else {
+          res.json({ status: 'no' });
+        }
+      }
+
+    } else {
+      res.json({ status: 'no' });
+    }
+
   });
 };

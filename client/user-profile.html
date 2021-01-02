@@ -24,14 +24,16 @@
     <!-- Stylesheets -->
     <link rel=stylesheet href="css/main.css">
     <link rel=stylesheet href="../css/normalize.css">
+    <link rel=stylesheet href="../css/user-profile.css">
 
     <title>Hello</title>
   </head>
   
   <body>
 
+    <h2 id="main-header">User Profile</h2>
+    
     <div id="main-content">
-      <h2 id="main-header">User Profile</h2>
       <div id="profile">
 
         <b>Picture</b>
@@ -51,6 +53,17 @@
         <p id="profile-bio"></p>
         <br>
         
+      </div>
+
+      <div id="interaction">
+        <div id="not-talked-to" hidden>
+          <p id="talk-to-instructions">Click here if you talked to this person.</p>
+          <button id="claim-talked-to" onclick="claimTalkedTo()">Ok</button>
+        </div>
+
+        <div id="talked-to" hidden>
+          <p>Yay! You have talked to this person.</p>
+        </div>
       </div>
 
       <a href="/directory">Find other people</a>
