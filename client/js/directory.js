@@ -1,4 +1,4 @@
-const hostname = 'http://localhost:3000';
+const hostname = location.protocol + '//' + location.hostname + (location.port ? ':'+location.port: '');
 
 axios.get(new URL('/all-users', hostname)).then(res => {
   console.log(res.data);

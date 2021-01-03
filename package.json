@@ -22,7 +22,7 @@
     "mongoose": "^5.11.5"
   },
   "devDependencies": {
-    "nodemon": "^2.0.4"
+    "nodemon": "^2.0.6"
   },
   "description": ""
 }

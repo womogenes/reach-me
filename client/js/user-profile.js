@@ -1,4 +1,4 @@
-const hostname = 'http://localhost:3000';
+const hostname = location.protocol + '//' + location.hostname + (location.port ? ':'+location.port: '');
 const url = window.location.href;
 const otherID = new URL(url).searchParams.get('userID');
 

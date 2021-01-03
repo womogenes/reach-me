@@ -1,4 +1,4 @@
-const hostname = 'http://localhost:3000';
+const hostname = location.protocol + '//' + location.hostname + (location.port ? ':'+location.port: '');
 
 const approveBio = (userID) => {
   axios.post(new URL(`/admin/approve-bio/${userID}`, hostname)).then(res => {
