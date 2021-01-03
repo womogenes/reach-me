@@ -13,14 +13,16 @@ require('./auth/auth-server.js')({ app, userdb });
 require('./pages.js')(app);
 
 // Info for pages
-require('./page-info/my-info.js')({ app, userdb });
 require('./page-info/profiles.js')({ app, userdb, talkedTodb });
-require('./page-info/all-users.js')({ app, userdb })
+require('./page-info/all-users.js')({ app, userdb });
+require('./page-info/my-info.js')({ app, userdb });
 require('./page-info/my-bio.js')({ app, userdb });
+require('./page-info/my-tags.js')({ app, userdb });
 
 // User inputs
 require('./user-input/edit-bio.js')({ app, userdb });
 require('./user-input/talked-to.js')({ app, userdb, talkedTodb });
+require('./user-input/add-tags.js')({ app, userdb, talkedTodb });
 
 // Admin routes
 require('./admin/admin.js')({ app, userdb });

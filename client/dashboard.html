@@ -28,32 +28,40 @@
     <h2 id="main-header">Dashboard</h2>
     
     <div id="main-content">
-      <div id="profile">
+      <div id="info-content">
+        <div id="profile">
 
-        <b>Your picture</b>
-        <br>
-        <img id="profile-picture"></img>
-        <br><br>
-        
-        <b>Your name</b>
-        <p id="profile-name"></p>
-        <br>
+          <b>Your picture</b>
+          <br>
+          <img id="profile-picture"></img>
+          <br><br>
+          
+          <b>Your name</b>
+          <p id="profile-name"></p>
+          <br>
 
-        <b>Your email</b>
-        <p id="profile-email"></p>
-        <br>
+          <b>Your email</b>
+          <p id="profile-email"></p>
+          <br>
 
-        <b>Your bio</b>
-        <p id="profile-bio"></p>
-        <br>
+          <b>Your bio</b>
+          <p id="profile-bio"></p>
+          <br>
 
-        <form id="bio-edit-form" onsubmit="editBio(event)">
-          <label for="bio-input">Edit your bio:</label><br>
-          <textarea id="bio-input" type="text" form="bio-edit-form"></textarea>
-          <input id="bio-edit-submit-button" type="submit" value="Submit">
-        </form>
-        <p id="bio-edit-status">&nbsp;</p>
-        
+          <form id="bio-edit-form" onsubmit="editBio(event)">
+            <label for="bio-input">Edit your bio:</label><br>
+            <textarea id="bio-input" type="text" form="bio-edit-form"></textarea>
+            <input id="bio-edit-submit-button" type="submit" value="Submit">
+          </form>
+          <p id="bio-edit-status">&nbsp;</p>
+          
+        </div>
+
+        <div id="tags">
+          <b>Your tags</b>
+          <div id="tag-list"></div>
+        </div>
+
       </div>
 
       <a id="directory-link" href="/directory">Find other people</a>

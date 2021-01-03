@@ -1,5 +1,7 @@
+const { authCheck } = require('../auth/auth-check.js')();
+
 module.exports = ({ app, userdb }) => {
-  app.post('/edit-bio', async (req, res) => {
+  app.post('/edit-bio', authCheck, async (req, res) => {
     const { newBio } = req.body;
 
     if (!newBio) {

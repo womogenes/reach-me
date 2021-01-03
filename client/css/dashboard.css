@@ -1,13 +1,31 @@
-textarea {
-  max-width: 100%;
+.tag {
+  display: inline-block;
+
+  border: 1px solid #000000;
+  border-radius: 5px;
+
+  margin: 10px 0;
+  padding: 5px 10px;
+}
+
+.tag-text {
+  margin: 0;
 }
 
 #main-content {
   box-sizing: border-box;
+  width: 60%;
+}
+
+#info-content {
+  display: flex;
+  width: 80%;
 }
 
 #profile {
-  width: 80%;
+  margin-right: 50px;
+  flex-grow: 1;
+  width: 100%;
 }
 
 #bio-edit-form {
@@ -30,6 +48,11 @@ textarea {
 #bio-edit-status {
   color: #1d5f1a;
   margin-bottom: 20px;
+}
+
+#tags {
+  flex-grow: 1;
+  min-width: 20%;
 }
 
 #directory-link {
