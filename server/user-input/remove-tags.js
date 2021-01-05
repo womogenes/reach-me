@@ -1,7 +1,7 @@
 const { authCheck } = require('../auth/auth-check.js')();
 
 module.exports = ({ app, userdb }) => {
-  app.post('/add-tags', authCheck, async (req, res) => {
+  app.post('/remove-tags', authCheck, async (req, res) => {
     const { userID } = req.session;
     let userTags = await userdb.model('Tags').findOne({ userID: userID });
 
@@ -14,13 +14,13 @@ module.exports = ({ app, userdb }) => {
       userTags = newUserTags;
     }
 
-    if (!req.body.newTags) {
+    if (!req.body.toRemove) {
       res.sendStatus(400);
       return;
     }
 
     // Make sure the new tag is a valid one
-    const toInsert = await Promise.all(req.body.newTags.flatMap(async tag => {
+    const toRemove = await Promise.all(req.body.toRemove.flatMap(async tag => {
       if (!tag.name || !tag.category) return [];
 
       const found = await userdb.model('ValidTag').findOne({
@@ -35,7 +35,7 @@ module.exports = ({ app, userdb }) => {
     await userdb.model('Tags').updateOne({
       userID: userID
     }, {
-      $addToSet: { tags: toInsert }
+      $pullAll: { tags: toRemove }
     });
   });
 };

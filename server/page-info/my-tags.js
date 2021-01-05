@@ -6,11 +6,17 @@ module.exports = ({ app, userdb }) => {
     const user = await userdb.model('Tags').findOne({ userID: userID });
 
     if (!user) {
-      res.json({ tags: [] });
+      res.json([]);
+      
+    } else {
+      const toReturn = await Promise.all(user.tags.map(async tagID => {
+        const tag = await userdb.model('ValidTag').findOne({ _id: tagID });
+        return {
+          name: tag.name,
+          category: tag.category
+        };
+      }));
+      res.json(toReturn);
     }
-    else {
-      res.json({ tags: user.tags });
-    }
-    
   });
 };

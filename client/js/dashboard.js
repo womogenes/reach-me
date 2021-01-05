@@ -37,10 +37,8 @@ axios.get(new URL('/my-bio', hostname)).then(res => {
 // Get tags
 axios.get(new URL('/my-tags', hostname)).then(res => {
   console.log(res);
-
-  console.log(res.data.tags);
-
-  res.data.tags.forEach(tag => {
+  
+  res.data.forEach(tag => {
     const name = tag.name;
     const tagDiv = $('<div>', {
       class: 'tag'
@@ -50,7 +48,39 @@ axios.get(new URL('/my-tags', hostname)).then(res => {
       text: name
     });
     tagDiv.append(tagText);
+    const removeTag = $('<button>', {
+      class: 'tag-button',
+      text: '-'
+    });
+    removeTag.click(() => {
+      axios.post('/remove-tags', { toRemove: [tag] });
+    });
+    tagDiv.append(removeTag);
 
-    $('#tag-list').append(tagDiv);
-  })
+    $('#my-tag-list').append(tagDiv);
+  });
+});
+
+// Get list of all tags
+axios.get('/all-tags').then(res => {
+  res.data.forEach(tag => {
+    const tagDiv = $('<div>', {
+      class: 'tag'
+    });
+    const tagText = $('<p>', {
+      class: 'tag-text',
+      text: tag.name
+    });
+    tagDiv.append(tagText);
+    const addTag = $('<button>', {
+      class: 'tag-button',
+      text: '+'
+    });
+    addTag.click(() => {
+      axios.post('/add-tags', { newTags: [tag] });
+    });
+    tagDiv.append(addTag);
+
+    $('#available-tag-list').append(tagDiv);
+  });
 });

@@ -40,7 +40,34 @@ Example data:
 
 Logs the client out. No data to be sent, just removes authorization from the Google sign in thing and tells the server to delete the user's session.
 
+### Tags
 
+**POST `/add-tags`**
+
+Adds the given tags to the user's list. Payload should be an array of tags.
+
+Example input:
+
+```json
+[
+    {
+        "name": "freshman",
+        "category": "grade"
+    },
+    {
+        "name": "viola",
+		"category": "instrument"
+    }
+]
+```
+
+Incorrectly formatted tags are ignored.
+
+
+
+**POST `/remove-tags`**
+
+Removes the given tags from the user's list. Input format is the same as `/add-tags`--a list of tags, each tag being an object with a `name` and a `category` key.
 
 ### Other
 
@@ -54,11 +81,21 @@ Changes the user's pending bio. This will only change publicly displayed bio onc
 }
 ```
 
-The server returns a 204 code when done.
 
 
+**POST `/talked-to?userID=<userID`**>
+
+Tells the server that user claims they have talked to the user with the given id. Nothing to be sent with the request.
+
+(Responds with 400 error if the other user is not found, 204 otherwise)
 
 ## Information stuff
+
+### User information
+
+This includes information about the user themselves.
+
+
 
 **GET `/my-info`**
 
@@ -87,6 +124,29 @@ Returns the user's bio in the following format:
     "bio": "Hello I like dogs"
 }
 ```
+
+
+
+**GET `/my-tags`**
+
+Returns the user's tags as an array. Example:
+
+```json
+[
+    {
+        "name": "freshman",
+        "category": "grade"
+    },
+    {
+        "name": "viola",
+		"category": "instrument"
+    }
+]
+```
+
+### Other user information
+
+This includes information about other people.
 
 
 
@@ -128,6 +188,24 @@ The reply is pretty simple:
 ```
 
 
+
+**GET `/did-talk-to?userID=<userID`**
+
+Returns a **status** of the user's interaction status with the given other user. The response is one of these three options:
+
+```json
+{ "status": "yes" }
+```
+```json
+{ "status": "pending" }
+```
+```json
+{ "status": "no" }
+```
+
+1. `"yes"` means the the user and the other user have talked.
+2. `"pending"` means the user has claimed that they talked to the other user.
+3. `"no"` means the two users have not talked. (The other user can still have claimed to talked to this one, but this user won't know.)
 
 
 

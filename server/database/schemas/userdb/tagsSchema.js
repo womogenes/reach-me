@@ -2,7 +2,10 @@ const mongoose = require('mongoose');
 
 let tagsSchema = new mongoose.Schema({
   userID: { type: String, index: { unique: true }, required: true },
-  tags: { type: [{ name: String, category: String }], default: [] }
+  tags: { type: [{
+    type: mongoose.Schema.Types.ObjectId,
+    ref: 'ValidTag'
+  }] }
 }, {
   collection: 'tags'
 });
