@@ -7,7 +7,7 @@ module.exports = ({ userdb }) => {
 
     const admin = await userdb.model('Admin').findOne({ userID: req.session.userID });
     if (!admin) {
-      res.sendStatus(401);
+      res.sendStatus(403);
       return;
     }
 

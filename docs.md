@@ -229,3 +229,41 @@ Each element in the array looks like this:
 `tags` is an array of strings (but I haven't implemented this yet!)
 
 `userID` is the person's user ID, which for now is just their email but that might change.
+
+
+
+## Admin
+
+There are actions that only an admin can do. If a non-admin tries to access one of these endpoints, a 403 error is sent.
+
+**POST `/approve-bio?userID=<userID>`** (syntax will change soon)
+
+If the given user's pending bio exists, approves it. If the user doesn't have a pending bio, returns something like this:
+
+```json
+{
+    "message": "Approved user does not have a pending bio."
+}
+```
+
+along with a 400 error.
+
+
+
+**GET `/pending-bios`**
+
+Returns an array with all pending bios. Example:
+
+```json
+[
+    {
+        "userID": "williamf24@lakesideschool.org",
+        "bio": "Hello my name is william"
+    },
+    {
+        "userID": "williamfeng1729@gmail.com",
+        "bio": "Hello my name is also william"
+    }
+]
+```
+

@@ -20,7 +20,7 @@ axios.get(new URL('/admin/pending-bios', hostname)).then(res => {
     });
     const profileLink = $('<a>', {
       text: pendingBio.userID,
-      href: `/user/${pendingBio.userID}`,
+      href: `/user?userID=${pendingBio.userID}`,
       class: 'profile-link'
     });
     bioDiv.append(profileLink);
