@@ -1,6 +1,10 @@
 module.exports = ({ adminRouter, userdb }) => {
-  adminRouter.post('/approve-bio/:userID', async (req, res) => {
-    const approvedID = req.params.userID;
+  adminRouter.post('/approve-bio', async (req, res) => {
+    const approvedID = req.query.userID;
+    if (!approvedID) {
+      res.sendStatus(400);
+      return;
+    }
 
     const approvedBio = await userdb.model('PendingBio').findOne({ userID: approvedID });
     if (!approvedBio) {
