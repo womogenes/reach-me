@@ -3,21 +3,27 @@ const path = require('path');
 const { redirectLogin, redirectDashboard } = require('./redirects.js')();
 
 module.exports = (app) => {
-  // TODO: Can clean this up with a for loop
+  // TODO: Can clean this up with a for loop  
+  app.set('view engine', 'ejs');
+  app.set('views', path.join(__dirname, '/../client/views'));
+
+  app.get('/', (req, res) => {
+    res.render('landing-page/index.ejs');
+  });
 
   app.get('/dashboard', redirectLogin, (req, res) => {
-    res.sendFile(path.resolve(('client/dashboard.html')));
+    res.render('dashboard.ejs');
   });
 
   app.get('/login', redirectDashboard, (req, res) => {
-    res.sendFile(path.resolve(('client/login.html')));
+    res.render('login.ejs');
   });
 
   app.get('/directory', redirectLogin, (req, res) => {
-    res.sendFile(path.resolve(('client/directory.html')));
+    res.render('directory.ejs');
   });
 
   app.get('/user', redirectLogin, (req, res) => {
-    res.sendFile(path.resolve(('client/user-profile.html')));
+    res.render('/user-profile.ejs');
   });
 };
