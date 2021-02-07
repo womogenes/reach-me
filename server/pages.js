@@ -24,6 +24,6 @@ module.exports = (app) => {
   });
 
   app.get('/user', redirectLogin, (req, res) => {
-    res.render('/user-profile.ejs');
+    res.render('user-profile.ejs');
   });
 };

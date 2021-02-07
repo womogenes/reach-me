@@ -37,5 +37,7 @@ module.exports = ({ app, userdb }) => {
     }, {
       $addToSet: { tags: toInsert }
     });
+
+    res.sendStatus(201);
   });
 };

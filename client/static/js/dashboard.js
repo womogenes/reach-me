@@ -1,4 +1,5 @@
 const hostname = location.protocol + '//' + location.hostname + (location.port ? ':'+location.port: '');
+let myTags = [];
 
 // Handle for when submit edited bio is pressed
 const editBio = (event) => {
@@ -19,6 +20,59 @@ const editBio = (event) => {
   return false;
 };
 
+// Tags
+const makeTagDiv = (tag, type) => {
+  if (type === 'mine') {
+    const name = tag.name;
+    const tagDiv = $('<div>', {
+      class: 'tag'
+    });
+    const tagText = $('<p>', {
+      class: 'tag-text',
+      text: name
+    });
+    tagDiv.append(tagText);
+    const removeTag = $('<button>', {
+      class: 'tag-button',
+      text: '-'
+    });
+    removeTag.click(() => {
+      tagDiv.remove();
+      myTags = myTags.filter(t => t !== tag);
+      axios.post('/remove-tags', { toRemove: [tag] });
+    });
+    tagDiv.append(removeTag);
+
+    return tagDiv;
+
+  } else {
+    const tagDiv = $('<div>', {
+      class: 'tag'
+    });
+    const tagText = $('<p>', {
+      class: 'tag-text',
+      text: tag.name
+    });
+    tagDiv.append(tagText);
+    const addTag = $('<button>', {
+      class: 'tag-button',
+      text: '+'
+    });
+    addTag.click(() => {
+      if (!myTags.some(t => t.name === tag.name)) {
+        myTags.push(tag);
+      } else {
+        return;
+      }
+      $('#my-tag-list').append(makeTagDiv(tag, 'mine'));
+      axios.post('/add-tags', { newTags: [tag] });
+    });
+    tagDiv.append(addTag);
+
+    return tagDiv;
+  }
+};
+
 // Get basic info
 axios.get(new URL('/my-info', hostname)).then(res => {
   $('#profile-name').text(res.data.name);
@@ -35,52 +89,19 @@ axios.get(new URL('/my-bio', hostname)).then(res => {
 });
 
 // Get tags
-axios.get(new URL('/my-tags', hostname)).then(res => {
-  console.log(res);
-  
+axios.get(new URL('/my-tags', hostname)).then(res => {  
   res.data.forEach(tag => {
-    const name = tag.name;
-    const tagDiv = $('<div>', {
-      class: 'tag'
-    });
-    const tagText = $('<p>', {
-      class: 'tag-text',
-      text: name
-    });
-    tagDiv.append(tagText);
-    const removeTag = $('<button>', {
-      class: 'tag-button',
-      text: '-'
-    });
-    removeTag.click(() => {
-      axios.post('/remove-tags', { toRemove: [tag] });
-    });
-    tagDiv.append(removeTag);
-
+    const tagDiv = makeTagDiv(tag, 'mine');
     $('#my-tag-list').append(tagDiv);
   });
+
+  myTags = res.data;
 });
 
 // Get list of all tags
 axios.get('/all-tags').then(res => {
   res.data.forEach(tag => {
-    const tagDiv = $('<div>', {
-      class: 'tag'
-    });
-    const tagText = $('<p>', {
-      class: 'tag-text',
-      text: tag.name
-    });
-    tagDiv.append(tagText);
-    const addTag = $('<button>', {
-      class: 'tag-button',
-      text: '+'
-    });
-    addTag.click(() => {
-      axios.post('/add-tags', { newTags: [tag] });
-    });
-    tagDiv.append(addTag);
-
+    const tagDiv = makeTagDiv(tag, 'all');
     $('#available-tag-list').append(tagDiv);
   });
 });
