@@ -1,5 +1,5 @@
 module.exports = ({ adminRouter, userdb }) => {
-  adminRouter.use('/pending-bios', async (req, res) => {
+  adminRouter.get('/pending-bios', async (req, res) => {
     const pendingBios = await userdb.model('PendingBio').find({}, null, { sort: { updatedAt: 1 } });
     res.json(pendingBios.map(bio => {
       return {

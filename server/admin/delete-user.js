@@ -1,33 +1,27 @@
-module.exports = ({ adminRouter, userdb }) => {
+module.exports = ({ adminRouter, userdb, talkedTodb }) => {
   adminRouter.post('/delete-user', async (req, res) => {
-    const approvedID = req.query.userID;
-    if (!approvedID) {
+    const toDeleteID = req.query.userID;
+    if (!toDeleteID) {
       res.sendStatus(400);
       return;
     }
 
-    const approvedBio = await userdb.model('PendingBio').findOne({ userID: approvedID });
-    if (!approvedBio) {
-      res.status(400).send({
-        message: 'Approved user does not have a pending bio.'
-      });
-      return;
-    }
-
-    const userBio = await userdb.model('Bio').findOne({ userID: approvedID });
-    if (!userBio) {
-      const newUserBio = userdb.model('Bio')({
-        userID: approvedID,
-        bio: approvedBio.bio
-      });
-      newUserBio.save();
-
-    } else {
-      userBio.bio = approvedBio.bio;
-      userBio.save();
-    }
-
-    await userdb.model('PendingBio').deleteOne({ userID: approvedID });
+    /*
+    CLEAR OUT:
+    1. profile
+    2. bio
+    3. any pending bios
+    4. tags
+    5. talked to
+    6. talked to claims
+    */
+    
+    await userdb.model('User').deleteOne({ userID: toDeleteID });
+    await userdb.model('Bio').deleteOne({ userID: toDeleteID });
+    await userdb.model('PendingBio').deleteOne({ userID: toDeleteID });
+    await userdb.model('Tags').deleteOne({ userID: toDeleteID });
+    await talkedTodb.model('TalkedTo').deleteOne({ userID: toDeleteID });
+    await talkedTodb.model('TalkedToClaims').deleteOne({ userID: toDeleteID });
 
     res.sendStatus(204);
   });

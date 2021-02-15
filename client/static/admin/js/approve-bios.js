@@ -1,7 +1,7 @@
 const hostname = location.protocol + '//' + location.hostname + (location.port ? ':'+location.port: '');
 
 const approveBio = (userID) => {
-  axios.post(new URL(`/admin/approve-bio/${userID}`, hostname)).then(res => {
+  axios.post(new URL(`/admin/approve-bio?userID=${userID}`, hostname)).then(res => {
     console.log(res);
     if (res.status === 204) {
       const toRemove = $(`#bio-div-${userID}`.replace( /(:|\.|\[|\]|,|=|@)/g, "\\$1" ));

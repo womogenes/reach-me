@@ -27,7 +27,7 @@ require('./user-input/add-tags.js')({ app, userdb, talkedTodb });
 require('./user-input/remove-tags.js')({ app, userdb, talkedTodb });
 
 // Admin routes
-require('./admin/admin.js')({ app, userdb });
+require('./admin/admin.js')({ app, userdb, talkedTodb });
 
 // At the end because this uses the '/' path
 require('./file-server.js')(app);
