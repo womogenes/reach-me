@@ -19,6 +19,7 @@ require('./page-info/my-info.js')({ app, userdb });
 require('./page-info/my-bio.js')({ app, userdb });
 require('./page-info/my-tags.js')({ app, userdb });
 require('./page-info/all-tags.js')({ app, userdb });
+require('./page-info/user-tags.js')({ app, userdb });
 
 // User inputs
 require('./user-input/edit-bio.js')({ app, userdb });

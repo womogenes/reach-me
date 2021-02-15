@@ -42,6 +42,21 @@ axios.get(new URL(`/user-info?userID=${otherID}`, hostname)).then(res => {
   }
 });
 
+// Helper function for making tags
+const makeTagDiv = tag => {
+  const tagDiv = $('<div>', {
+    class: 'tag'
+  });
+  const tagText = $('<p>', {
+    class: 'tag-text',
+    text: tag.name
+  });
+  tagDiv.append(tagText);
+
+  return tagDiv;
+};
+
+// DISPLAY INFO
 axios.get(new URL(`/user-bio?userID=${otherID}`, hostname)).then(res => {
   $('#profile-bio').text(res.data.bio);
 }).catch(err => {
@@ -51,4 +66,16 @@ axios.get(new URL(`/user-bio?userID=${otherID}`, hostname)).then(res => {
 axios.get(new URL(`/did-talk-to?userID=${otherID}`, hostname)).then(res => {
   console.log(res);
   updateStatus(res.data.status);
+});
+
+axios.get(new URL(`/user-tags?userID=${otherID}`, hostname)).then(res => {  
+  res.data.forEach(tag => {
+    const tagDiv = makeTagDiv(tag);
+
+    console.log(tagDiv);
+
+    $('#tag-list').append(tagDiv);
+  });
+
+  myTags = res.data;
 });
