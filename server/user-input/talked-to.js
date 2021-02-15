@@ -24,13 +24,19 @@ module.exports = ({ app, userdb, talkedTodb }) => {
       const userTalkedTo = await talkedTodb.model('TalkedTo').findOne({ userID: userID });
 
       if (userTalkedTo) {
-        userTalkedTo.talkedTo.push(otherID);
+        userTalkedTo.talkedTo.push({
+          userID: otherID,
+          timestamp: Date.now()
+        });
         userTalkedTo.save();
-
+      
       } else {
         const newUserTalkedTo = talkedTodb.model('TalkedTo')({
           userID: userID,
-          talkedTo: [otherID]
+          talkedTo: [{
+            userID: otherID,
+            timestamp: Date.now()
+          }]
         });
         newUserTalkedTo.save();
       }

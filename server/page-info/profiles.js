@@ -59,7 +59,7 @@ module.exports = ({ app, userdb, talkedTodb }) => {
     const talkedTo = await talkedTodb.model('TalkedTo').findOne({ userID: userID });
 
     if (talkedTo) {
-      if (talkedTo.talkedTo.includes(otherID)) {
+      if (talkedTo.talkedTo.find(e => e.userID === otherID)) {
         res.json({ status: 'yes' });
 
       } else {
