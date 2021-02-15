@@ -1,9 +1,6 @@
 module.exports = ({ adminRouter, userdb }) => {
-  adminRouter.post('/approve-bio', async (req, res) => {
+  adminRouter.post('/delete-user', async (req, res) => {
     const approvedID = req.query.userID;
-
-    console.log(approvedID);
-
     if (!approvedID) {
       res.sendStatus(400);
       return;
