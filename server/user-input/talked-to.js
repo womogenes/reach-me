@@ -1,7 +1,7 @@
 const { authCheck } = require('../auth/auth-check.js')();
 
 module.exports = ({ app, userdb, talkedTodb }) => {
-  const checkBadges = require('../badges/check-badges.js')({ userdb });
+  const checkBadges = require('../badges/check-badges.js')({ userdb, talkedTodb });
 
   app.post('/talked-to', authCheck, async (req, res) => { 
     const otherID = req.query.userID;
@@ -60,8 +60,8 @@ module.exports = ({ app, userdb, talkedTodb }) => {
       removeClaim(userID, otherTalkedToClaims);
 
       // Add badges
-      checkBadges(userID, otherID);
-      checkBadges(otherID, userID);
+      await checkBadges(userID, otherID);
+      await checkBadges(otherID, userID);
 
     } else {
       // Otherwise, add the claim to our user's claims

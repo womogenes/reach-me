@@ -2,10 +2,7 @@ const mongoose = require('mongoose');
 
 let talkedToSchema = new mongoose.Schema({
   userID: { type: String, index: { unique: true }, required: true },
-  talkedTo: { type: [{
-    userID: String,
-    timestamp: Date
-  }], default: [] }
+  talkedTo: [{ userID: String, timestamp: Date }]
 }, {
   collection: 'talkedTo'
 });
