@@ -10,33 +10,51 @@
   padding: 5px 10px;
 }
 
-.tag-text {
-  margin: 0;
-  margin-right: 5px;
+  .tag-text {
+    margin: 0;
+    margin-right: 5px;
+  }
+
+  .tag-button {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    width: 10px;
+    height: 30px;
+    margin-left: 10px;
+
+    font-weight: normal;
+    opacity: 0.7;
+  }
+
+  .tag-button:hover {
+    font-weight: bold;
+    opacity: 1;
+    cursor: pointer;
+  }
+
+.badge {
+  border: 1px solid #000000;
+  border-radius: 5px;
+
+  margin: 10px 0;
+  padding: 5px 15px;
 }
 
-.tag-button {
-  display: flex;
-  align-items: center;
-  justify-content: center;
+  .badge-title {
+    font-weight: bold;
+    margin-bottom: 10px;
+  }
 
-  width: 10px;
-  height: 30px;
-  margin-left: 10px;
-
-  font-weight: normal;
-  opacity: 0.7;
-}
-
-.tag-button:hover {
-  font-weight: bold;
-  opacity: 1;
-  cursor: pointer;
-}
+  .badge-description {
+    font-size: 10pt;
+  }
 
 #main-content {
+  display: inline-block;
   box-sizing: border-box;
-  width: 60%;
+  min-width: 60%;
 }
 
 #info-content {
@@ -54,44 +72,58 @@
   margin-bottom: 20px;
 }
 
-#bio-input {
-  width: 100%;
-  height: 7em;
-  font-size: 12pt;
+  #bio-input {
+    width: 100%;
+    height: 7em;
+    font-size: 12pt;
 
-  margin-top: 5px;
-  margin-bottom: 10px;
-}
+    margin-top: 5px;
+    margin-bottom: 10px;
+  }
 
-#bio-edit-submit-button {
-  cursor: pointer;
-}
+  #bio-edit-submit-button {
+    cursor: pointer;
+  }
 
-#bio-edit-status {
-  color: #1d5f1a;
-  margin-bottom: 20px;
-}
+  #bio-edit-status {
+    color: #1d5f1a;
+    margin-bottom: 20px;
+  }
 
 #tags {
   min-width: 40%;
+  margin-right: 20px;
 }
 
-#my-tag-list {
+  #my-tag-list {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+
+    margin-top: 10px;
+    margin-bottom: 20px;
+  }
+
+  #available-tag-list {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+
+    margin-top: 10px;
+  }
+
+#badges {
   display: flex;
   flex-direction: column;
   align-items: flex-start;
 
-  margin-top: 10px;
-  margin-bottom: 20px;
+  min-width: 40%;
+  margin-right: 20px;
 }
 
-#available-tag-list {
-  display: flex;
-  flex-direction: column;
-  align-items: flex-start;
-
-  margin-top: 10px;
-}
+  #badges b {
+    margin-bottom: 4px;
+  }
 
 #directory-link {
   margin-top: 20px;

@@ -20,6 +20,27 @@ const editBio = (event) => {
   return false;
 };
 
+// Badges
+// Going to have title, description
+const makeBadgeDiv = (badge) => {
+  const badgeDiv = $('<div>', {
+    class: 'badge'
+  });
+  const badgeTitle = $('<p>', {
+    class: 'badge-title',
+    text: badge.title
+  });
+  const badgeDescription = $('<p>', {
+    class: 'badge-description',
+    text: badge.description
+  });
+
+  badgeDiv.append(badgeTitle);
+  badgeDiv.append(badgeDescription);
+
+  return badgeDiv;
+};
+
 // Tags
 const makeTagDiv = (tag, type) => {
   if (type === 'mine') {
@@ -105,3 +126,11 @@ axios.get('/all-tags').then(res => {
     $('#available-tag-list').append(tagDiv);
   });
 });
+
+// Get badges
+axios.get('/my-badges').then(res => {
+  res.data.forEach(badge => {
+    const badgeDiv = makeBadgeDiv(badge);
+    $('#badge-list').append(badgeDiv);
+  })
+})
