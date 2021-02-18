@@ -1,8 +1,8 @@
-const { model } = require('mongoose');
-
 const { authCheck } = require('../auth/auth-check.js')();
 
 module.exports = ({ app, userdb, talkedTodb }) => {
+  const checkBadges = require('../badges/check-badges.js')({ userdb });
+
   app.post('/talked-to', authCheck, async (req, res) => { 
     const otherID = req.query.userID;
     const { userID } = req.session;
@@ -14,7 +14,7 @@ module.exports = ({ app, userdb, talkedTodb }) => {
     }
 
     // Verify that the other user exists
-    if (!await userdb/model('User').findOne({ userID: otherID })) {
+    if (!await userdb.model('User').findOne({ userID: otherID })) {
       res.status(400);
       return;
     }
@@ -58,6 +58,10 @@ module.exports = ({ app, userdb, talkedTodb }) => {
 
       // Remove the claim from other user
       removeClaim(userID, otherTalkedToClaims);
+
+      // Add badges
+      checkBadges(userID, otherID);
+      checkBadges(otherID, userID);
 
     } else {
       // Otherwise, add the claim to our user's claims

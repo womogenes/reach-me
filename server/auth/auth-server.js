@@ -43,7 +43,6 @@ module.exports = ({ app, userdb }) => {
         });
         
         user.save((err, user) => {
-          console.log(`User ${user} saved to database.`);
         });
       }
 
