@@ -1,0 +1,57 @@
+* {
+  font-family: "Open Sans", sans-serif;
+  font-size: 15px;
+}
+
+.btn {
+  border-radius: 0;
+}
+
+.navbar-brand {
+  font-family: "Montserrat", sans-serif;
+  font-size: 26px;
+}
+
+.text-maroon {
+  color: #67141e !important;
+}
+
+.bg-maroon {
+  background-color: #67141e !important;
+}
+
+.nav-item {
+  margin-left: 2rem !important;
+}
+
+.section-title {
+  font-weight: bold;
+  font-size: 36px;
+  margin-bottom: 0;
+}
+
+.row > * {
+  padding-left: 0 !important;
+}
+
+.row-normal {
+  padding-right: 0 !important;
+}
+
+.divider {
+  height: 1px;
+  background-color: #777777 !important;
+  width: 100%;
+  margin-top: 2rem;
+  margin-bottom: 2rem;
+}
+
+.bg-light {
+  background-color: #f8f8f8 !important;
+}
+
+.challenge-card {
+  width: 100%;
+  display: flex;
+  align-items: center;
+}
