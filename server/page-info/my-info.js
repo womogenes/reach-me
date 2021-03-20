@@ -1,24 +1,12 @@
-const { authCheck } = require('../auth/auth-check.js')();
-
-module.exports = ({ app, userdb }) => {
-  app.get('/my-info', authCheck, async (req, res) => {
-    const { userID } = req.session;
+module.exports = async (userID, userdb) => {
+  const user = await userdb.model('User').findOne({ 'userID': userID });
+  if (!user) {
+    return 500;
+  };
   
-    if (userID) {
-      const user = await userdb.model('User').findOne({ 'userID': userID });
-      if (!user) {
-        res.redirect('/login');
-        return;
-      };
-      
-      res.json({
-        name: user.name,
-        email: user.email,
-        picture: user.picture
-      });
-  
-    } else {
-      res.redirect('/login');
-    }
-  });
+  return {
+    name: user.name,
+    email: user.email,
+    picture: user.picture
+  };
 };

@@ -10,12 +10,11 @@ let { talkedTodb } = require('./database/talkedTodb.js')();
 
 require('./middleware.js')({ app, userdb });
 require('./auth/auth-server.js')({ app, userdb });
-require('./pages.js')(app);
+require('./pages/pages.js')({ app, userdb });
 
 // Info for pages
 require('./page-info/profiles.js')({ app, userdb, talkedTodb });
 require('./page-info/all-users.js')({ app, userdb });
-require('./page-info/my-info.js')({ app, userdb });
 require('./page-info/my-bio.js')({ app, userdb });
 require('./page-info/my-tags.js')({ app, userdb });
 require('./page-info/my-badges.js')({ app, userdb });
