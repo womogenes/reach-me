@@ -1,0 +1,100 @@
+<div id="pt-section-wrapper-1" class="pt-section-wrapper">
+
+  <div id="pt-section-1"
+    style="background: rgba(255,255,255, 1); background-size: cover; background-position: center; font-size: 0;"
+    class="pt-section colourbackground hidden-section">
+
+    <div id="pt-section-canvas-1" class="pt-section-canvas sectionViewing">
+      <div id="pt-section-1-overlay-1">
+
+        <div id="pt-section-1-overlay-wrapper-1" class="overlay-wrapper makevisible">
+          <div id="pt-section-1-overlay-1-content" class="pt-overlay">
+            <a class="linked-overlay" href="javascript:void(0)" onclick="toggleSection("#pt-section-2")">
+              <div id="pt-section-1-overlay-1-content-text" class="overlay-text nobackgroundcolor">
+              </div>
+            </a>
+          </div>
+        </div>
+      </div>
+
+      <div id="pt-section-1-overlay-2">
+        <div id="pt-section-1-overlay-wrapper-2" class="overlay-wrapper makevisible">
+          <div id="pt-section-1-overlay-2-content" class="pt-overlay">
+            <div id="pt-section-1-overlay-2-content-text" class="overlay-text nobackgroundcolor">
+              <p><b>ReachMe</b></p>
+            </div>
+          </div>
+        </div>
+      </div>
+
+    </div>
+
+  </div>
+
+</div>
+<div id="pt-section-wrapper-2" class="pt-section-wrapper">
+  <div id="pt-section-2"
+    style="background: rgba(255,255,255, 1); background-size: cover; background-position: center; font-size: 0;"
+    class="pt-section colourbackground">
+    <div id="pt-section-canvas-2" class="pt-section-canvas sectionViewing">
+      <%= userID %>
+      <% if (!userID) { %>
+        <div id="pt-section-2-overlay-1">
+          <a href="/login" style="text-decoration: none;">
+            <div id="pt-section-2-overlay-wrapper-1" class="overlay-wrapper makevisible buttonwrapper">
+              <div id="pt-section-2-overlay-1-content" class="pt-overlay btn-menu-wrapper">
+                <div id="pt-section-2-overlay-1-content-text" class="overlay-text btn-menu">
+                  <p><b>LOG IN</b></p>
+                </div>
+              </div>
+            </div>
+          </a>
+        </div>
+      <% } else { %>
+        <div id="pt-section-2-overlay-1">
+          <a href="/dashboard" style="text-decoration: none;">
+            <div id="pt-section-2-overlay-wrapper-1" class="overlay-wrapper makevisible buttonwrapper">
+              <div id="pt-section-2-overlay-1-content" class="pt-overlay btn-menu-wrapper" style="width: 150px;">
+                <div id="pt-section-2-overlay-1-content-text" class="overlay-text btn-menu">
+                  <p><b>DASHBOARD</b></p>
+                </div>
+              </div>
+            </div>
+          </a>
+        </div>
+      <% } %>
+
+      <div id="pt-section-2-overlay-2">
+        <div id="pt-section-2-overlay-wrapper-2" class="overlay-wrapper makevisible">
+          <div id="pt-section-2-overlay-2-content" class="pt-overlay">
+            <div id="pt-section-2-overlay-2-content-text" class="overlay-text nobackgroundcolor">
+              <p><b><a href="#pt-section-3" class="">ReachMe</a></b></p>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div id="pt-section-2-overlay-3">
+        <div id="pt-section-2-overlay-wrapper-3" class="overlay-wrapper makevisible buttonwrapper">
+          <div id="pt-section-2-overlay-3-content" class="pt-overlay btn-menu-wrapper">
+            <a class="linked-overlay" href="#pt-section-4">
+              <div id="pt-section-2-overlay-3-content-text" class="overlay-text nobackgroundcolor btn-menu">
+                <p>ABOUT</p>
+              </div>
+            </a>
+          </div>
+        </div>
+      </div>
+      <div id="pt-section-2-overlay-4">
+        <div id="pt-section-2-overlay-wrapper-4" class="overlay-wrapper makevisible buttonwrapper">
+          <div id="pt-section-2-overlay-4-content" class="pt-overlay btn-menu-wrapper">
+            <a class="linked-overlay" href="#pt-section-5">
+              <div id="pt-section-2-overlay-4-content-text" class="overlay-text nobackgroundcolor btn-menu">
+                <p>GUIDELINES</p>
+              </div>
+            </a>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

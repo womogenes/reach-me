@@ -8,9 +8,13 @@ module.exports = ({ app, userdb }) => {
   app.set('views', path.join(__dirname, '/../../client/views'));
 
   require('./dashboard.js')({ app, userdb });
+  require('./challenges.js')({ app, userdb });
+  require('./achievements.js')({ app, userdb });
 
   app.get('/', (req, res) => {
-    res.render('landing-page/index.ejs');
+    res.render('landing-page/index.ejs', {
+      userID: req.session.userID
+    });
   });
 
   app.get('/login', redirectDashboard, (req, res) => {

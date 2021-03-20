@@ -26,46 +26,25 @@
     />
     <link rel="icon" 
       type="image/png" 
-      href="./reachme_favicon.png">
+      href="./images/reachme_favicon.png">
     <link href="./css/styles.css" rel="stylesheet" />
 
     <title>ReachMe | Profile</title>
   </head>
   <body>
-    <nav class="navbar my-3 navbar-expand-lg navbar-light">
-      <div class="container">
-        <a class="navbar-brand text-maroon" href="#">ReachMe</a>
-        <ul class="navbar-nav align-items-center">
-          <li class="nav-item">
-            <a class="nav-link" href="#">ABOUT</a>
-          </li>
-          <li class="nav-item">
-            <a class="nav-link" href="#">GUIDELINES</a>
-          </li>
-          <li class="nav-item">
-            <a class="nav-link" href="#">DIRECTORY</a>
-          </li>
-          <li class="nav-item">
-            <a class="nav-link" href="#">DASHBOARD</a>
-          </li>
-          <li class="nav-item">
-            <button class="btn text-white bg-maroon px-4">LOG OUT</button>
-          </li>
-        </ul>
-      </div>
-    </nav>
+    <%- include('partials/header'); %>
 
     <div
       class="container d-flex justify-content-center"
       style="margin-top: 6rem"
     >
-    <a href="./challenges.html"><img
+    <a href="./challenges"><img
       src="./images/challenges_grey.png"
       alt="Challenges"
       width="67"
       class="mx-5"
     /></a>
-    <a href="./achievements.html"><img 
+    <a href="./achievements"><img 
       src="./images/achievements_grey.png" 
       class="mx-5" 
       alt="Achievements" 
