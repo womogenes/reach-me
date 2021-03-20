@@ -30,30 +30,7 @@
   <body>
     <%- include('partials/header'); %>
 
-    <div
-      class="container d-flex justify-content-center"
-      style="margin-top: 6rem"
-    >
-    <a href="./challenges"><img
-      src="./images/challenges.png"
-      alt="Challenges"
-      width="67"
-      class="mx-5"
-    /></a>
-    <a href="./achievements"><img 
-      src="./images/achievements_grey.png" 
-      class="mx-5" 
-      alt="Achievements" 
-      width="67"
-      /></a>
-    <a href="./dashboard"><img 
-      src="./images/profile_grey.png" 
-      alt="Dashboard" 
-      class="mx-5" 
-      width="67"
-      /></a>
-
-    </div>
+    <%- include('partials/section-nav.ejs', { page: "challenges" }) %>
 
     <div class="container divider my-5"></div>
 
