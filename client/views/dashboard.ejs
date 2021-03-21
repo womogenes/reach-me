@@ -82,71 +82,20 @@
                 class="mx-4"
               ></div>
               <p style="font-size: 18px">
-                This is where the student would put their personal info
-                and all that fun stuff. Lorem ipsum dolor sit amet consectetur adipisicing elit.
-                Minima enim exercitationem laborum, sint eveniet velit dolores fugit fugiat consequatur.
+                <%= bio || "Your bio hasn't been written yet. Click the edit icon to create it!" %>
               </p>
             </div>
           </div>
         </div>
         <div class="col-md-5">
           <div class="col-md-12 d-flex flex-column">
+
             <div class="bg-light w-100 py-5 px-4 align-items-center mb-3">
-              <span
-                class="badge rounded-pill px-4 py-3 text-white mb-2 me-2"
-                style="
-                  font-size: 18px;
-                  font-weight: normal;
-                  background-color: #95d89c;
-                "
-                >SPORTS</span
-              >
-              <span
-                class="badge rounded-pill px-4 py-3 text-white mb-2 me-2"
-                style="
-                  font-size: 18px;
-                  font-weight: normal;
-                  background-color: #95bcd8;
-                "
-                >ANIMALS</span
-              >
-              <span
-                class="badge rounded-pill px-4 py-3 text-white mb-2 me-2"
-                style="
-                  font-size: 18px;
-                  font-weight: normal;
-                  background-color: #d895d5;
-                "
-                >GAMER</span
-              >
-              <span
-                class="badge rounded-pill px-4 py-3 text-white mb-2 me-2"
-                style="
-                  font-size: 18px;
-                  font-weight: normal;
-                  background-color: #d89595;
-                "
-                >ARTS & CRAFTS</span
-              >
-              <span
-                class="badge rounded-pill px-4 py-3 text-white mb-2 me-2"
-                style="
-                  font-size: 18px;
-                  font-weight: normal;
-                  background-color: #9e95d8;
-                "
-                >INSTRUMENTS</span
-              >
-              <span
-                class="badge rounded-pill px-4 py-3 text-white mb-2 me-2"
-                style="
-                  font-size: 18px;
-                  font-weight: normal;
-                  background-color: #efdd7c;
-                "
-                >COMEDY</span
-              >
+              <% for (tag of tags) { %>
+                <%- include('partials/my-tag.ejs', { tagName: tag.name }) %>
+              <% } %>
             </div>
+
             <div class="bg-light w-100 py-5 px-5 d-flex flex-column">
               <p class="section-title mb-0 w-100 text-center mb-4">
                 RECENT ACTIVITY

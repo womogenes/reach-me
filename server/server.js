@@ -15,8 +15,6 @@ require('./pages/pages.js')({ app, userdb });
 // Info for pages
 require('./page-info/profiles.js')({ app, userdb, talkedTodb });
 require('./page-info/all-users.js')({ app, userdb });
-require('./page-info/my-bio.js')({ app, userdb });
-require('./page-info/my-tags.js')({ app, userdb });
 require('./page-info/my-badges.js')({ app, userdb });
 require('./page-info/all-tags.js')({ app, userdb });
 require('./page-info/user-tags.js')({ app, userdb });

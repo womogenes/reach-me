@@ -1,22 +1,15 @@
-const { authCheck } = require('../auth/auth-check.js')();
-
-module.exports = ({ app, userdb }) => {
-  app.get('/my-tags', authCheck, async (req, res) => {
-    const { userID } = req.session;
+module.exports = async (userID, userdb) => {
     const user = await userdb.model('Tags').findOne({ userID: userID });
 
-    if (!user) {
-      res.json([]);
+    if (!user) return [];
       
-    } else {
-      const toReturn = await Promise.all(user.tags.map(async tagID => {
-        const tag = await userdb.model('ValidTag').findOne({ _id: tagID });
-        return {
-          name: tag.name,
-          category: tag.category
-        };
-      }));
-      res.json(toReturn);
-    }
-  });
+    const toReturn = await Promise.all(user.tags.map(async tagID => {
+      const tag = await userdb.model('ValidTag').findOne({ _id: tagID });
+      return {
+        name: tag.name,
+        category: tag.category
+      };
+    }));
+    
+    return toReturn;
 };
