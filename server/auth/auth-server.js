@@ -8,21 +8,26 @@ module.exports = ({ app, userdb }) => {
   // Backend verification stuff
 
   // Session stuff
-  app.use(session({
-    name: 'awesomename',
-    resave: false,
-    saveUninitialized: false,
-    secret: process.env.SESS_SECRET,
-    cookie: {
-      maxAge: 1000 * 60 * 60 * 2, // Two hours!
-      sameSite: true,
-      secure: process.env.IN_PROD === 'prod'
-    },
-    store: new MongoStore({'url': `mongodb+srv://server:${process.env.MONGO_ATLAS_PASSWORD}@reach-me.wwawg.mongodb.net/sessions?retryWrites=true&w=majority`})
-  }));
+  app.use(
+    session({
+      name: 'awesomename',
+      resave: false,
+      saveUninitialized: false,
+      secret: process.env.SESS_SECRET,
+      cookie: {
+        maxAge: 1000 * 60 * 60 * 2, // Two hours!
+        sameSite: true,
+        secure: process.env.IN_PROD === 'prod',
+      },
+      store: new MongoStore({
+        url: `mongodb+srv://server:${process.env.MONGO_ATLAS_PASSWORD}@reach-me.wwawg.mongodb.net/sessions?retryWrites=true&w=majority`,
+      }),
+    })
+  );
 
   app.post('/login', async function (req, res) {
-    if (true) { //try {
+    if (true) {
+      //try {
       const ticket = await client.verifyIdToken({
         idToken: req.body.idToken,
         audience: process.env.GOOGLE_CLIENT_ID,
@@ -33,26 +38,25 @@ module.exports = ({ app, userdb }) => {
 
       // TODO: assert domain is proper
 
-      if (!await userdb.model('User').exists({ email: email })) {
+      if (!(await userdb.model('User').exists({ email: email }))) {
         const user = userdb.model('User')({
           userID: email,
           googleID: payload['sub'],
           name: payload['name'],
           email: email,
-          picture: payload['picture']
+          picture: payload['picture'],
         });
-        
-        user.save((err, user) => {
-        });
+
+        user.save((err, user) => {});
       }
 
       req.session.userID = email;
-      
+
       res.status(200);
       res.redirect('/dashboard');
       res.end();
-      
-    } else { // } catch {
+    } else {
+      // } catch {
       res.sendStatus(400);
     }
   });

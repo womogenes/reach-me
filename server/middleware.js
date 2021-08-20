@@ -7,7 +7,7 @@ const rateLimit = require('express-rate-limit');
 // 100 requests per second
 const limiter = rateLimit({
   windowMs: 1 * 1000,
-  max: 100
+  max: 100,
 });
 
 module.exports = ({ app, userdb }) => {

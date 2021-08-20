@@ -6,8 +6,8 @@ module.exports = () => {
       next();
     }
   };
-  
+
   return {
-    authCheck: authCheck
+    authCheck: authCheck,
   };
 };
